@@ -1,6 +1,10 @@
 *** Settings ***
-Resource    ../base.robot
+Test Setup    Abrir App
+Test Teardown    TearDown
+Resource    ..//base.robot
 
-*** Variables ***
 
-*** Keywords ***
+*** Test Cases ***
+Clicar pix
+    Click Element    ${ButtonPix}
+    Wait Until Element Is Visible    ${textoPix}

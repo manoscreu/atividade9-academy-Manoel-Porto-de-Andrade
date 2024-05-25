@@ -6,7 +6,7 @@ Resource    ..//base.robot
 *** Variables ***
 ${ANDROID_AUTOMATION_NAME}    UIAutomator2
 ${ANDROID_PLATFORM_VERSION}    14   
-${APP_PACKAGE}    com.saucelabs.mydemoapp.rn
+${APP_PACKAGE}    com.ricardodalarme.nubank_clone
 ${APP_ACTIVITY}    .MainActivity
 ${ANDROID_PLATFORM_NAME}    Android
 

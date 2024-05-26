@@ -34,7 +34,16 @@ ${depostioBoleto}          ${prefixoTextos}     [contains(@content-desc, "Boleto
 ${depostioTED}             ${prefixoTextos}     [contains(@content-desc, "TED/DOC")]
 ${depostioSalario}         ${prefixoTextos}     [contains(@content-desc, "Trazer seu salário")]
 ${buttonNovoEmprestimo}    ${prefixoButton}     [@content-desc="NOVO EMPRÉSTIMO"]
-    
+${buttonEmprestimo}        ${prefixoTextos}     [contains(@content-desc,"Valor disponível de até")]
+${buttonInvestimentos}     ${prefixoTextos}     [contains(@content-desc, "Investimentos")]
+${buttonSeguroDeVida}      ${prefixoTextos}     [contains(@content-desc,"Seguro de vida")]
+${buttonWhatsApp}          ${prefixoTextos}     [contains(@content-desc,"WhatsApp")]
+${ButonIndicarAmigos}      ${prefixoTextos}     [contains(@content-desc,"Indicar amigos")]
+${BTN_IndicarAmigos}       ${prefixoButton}     [@content-desc="INDICAR AMIGOS"]
+${buttonCartao}            ${prefixoTextos}     [contains(@content-desc,"Cartão de Crédito")]
+${widgetConvidar}          //android.widget.ScrollView/android.widget.Button[3]
+${eyeWidget}               //android.widget.ScrollView/android.widget.Button[1]
+        
 #Telas
 ${telaTransferencia}        xpath=//android.widget.EditText[@text="R$ 0,00"]
 ${telaDeposito}             [@content-desc="NOVO EMPRÉSTIMO"]
@@ -61,6 +70,21 @@ ${entendaFunciona}         ${prefixoTextos}     [@content-desc="Entenda como fun
 ${emprestimosAtivos}       ${prefixoTextos}     [@content-desc="Você não possui nenhum empréstimo ativo."]
 ${doacao}                  ${prefixoTextos}     [@content-desc="Doação"]
 ${encontrarAtalhos}        ${prefixoTextos}     [@content-desc="Encontrar atalhos"]
+${tituloInvestimentos}     ${prefixoTextos}     [@content-desc="Invista sem taxas e burocracia!"]
+${investParag1}            ${prefixoTextos}     [contains(@content-desc, "Estamos convidando alguns clientes")]
+${investParag2}            ${prefixoTextos}     [contains(@content-desc,"Além de não pagar nada para abrir a conta")]
+${textoparag1}    Estamos convidando alguns clientes do Nubank para serem os primeiros a fazer parte desta revolução roxa nos investimentos, e você é um deles!
+${textoIndicacao}          //android.widget.ImageView[contains(@content-desc, "Resgate seus amigos da fila do banco")]
+${faturaAtual}             ${prefixoTextos}     [@content-desc="Fatura atual"]
+${valorFatura}             ${prefixoTextos}     [@content-desc="R$ 780,72"]
+${limiteDisponivel}        ${prefixoTextos}     [@content-desc="Limite disponível R$ 806,78"]
+${pagarFatura}             ${prefixoTextos}     [@content-desc="Pagar fatura"]
+${resumoFatura}            ${prefixoTextos}     [@content-desc="Resumo de faturas"]
+${ajustarLimites}          ${prefixoTextos}     [@content-desc="Ajustar limites"]
+${cartaoVirtual}           ${prefixoTextos}     [@content-desc="Cartão virtual"]
+${pagRecebido}             ${prefixoTextos}     [contains(@content-desc,"Pagamento recebido")]
+${pagSupermercado}         ${prefixoTextos}     [contains(@content-desc,"Supermercado")]
+${transfEnviada}           ${prefixoTextos}     [contains(@content-desc,"Transferência enviada")]
 
 
 
@@ -101,7 +125,6 @@ Quando o usuario usar o botao cobrar
     Swipe By Percent    90    40    0    40
     Clica e espera    ${carrosselButton3}    ${telaCobrar}
 
-
 Entao o usuario tera acesso a funcao de cobrança
     Element Should Be Visible    ${telaRecarga}
     ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${telaRecarga}    hint
@@ -123,6 +146,65 @@ Entao o usuario pode visualizar o botao encontrar atalho
     Element Should Be Visible    ${carrosselButton5}
     Verifica visivel e texto     ${encontrarAtalhos}    Encontrar atalhos
 
+Entao o usuario pode visualizar o botao meus cartoes
+    Element Should Be Visible    ${buttonMeusCartoes}
+    Verifica visivel e texto     ${buttonMeusCartoes}    Meus cartões
+
+Quando o usuario acessar o atalho de convidar amigos
+    Clica e espera    ${widgetConvidar}    ${textoIndicacao}
+
+Quando o usuario acessar o botao emprestimo
+    Element Should Be Visible    ${campoEmprestimo}
+    Verifica visivel e texto     ${buttonMeusCartoes}    Você tem R$ 10.000,00 disponíveis para empréstimo.
+
+Quando o usuario acessar o botao cartao de credito
+    Swipe By Percent    50    80    50    30
+    Clica e espera    ${buttonCartao}    ${faturaAtual} 
+
+Quando acessar o campo emprestimo
+    Swipe By Percent    50    80    50    30
+    Clica e espera    ${buttonEmprestimo}    ${faturaAtual}
+
+Quando acessar o campo investimentos
+    Swipe By Percent    50    80    50    30
+    Clica e espera    ${buttonInvestimentos}    ${tituloInvestimentos}
+
+Quando o usuario usar o botao de indicar amigos
+    Swipe By Percent    50    80    50    0
+    Wait Until Element Is Visible    ${buttonWhatsApp}
+    Swipe By Percent    70    90    20    90
+    Clica e espera    ${ButonIndicarAmigos}    ${BTN_IndicarAmigos}
+
+Entao o usuario terá acesso a todas as funçoes do cartao
+    Compara contentDesc contains    ${faturaAtual}         Fatura atual
+    Compara contentDesc contains    ${valorFatura}         R$ 780,72
+    Compara contentDesc contains    ${limiteDisponivel}    Limite disponível R$ 806,78
+    Compara contentDesc contains    ${pagarFatura}         Pagar fatura
+    Compara contentDesc contains    ${resumoFatura}        Resumo de faturas
+    Compara contentDesc contains    ${ajustarLimites}      Ajustar limites
+    Compara contentDesc contains    ${cartaoVirtual}       Cartão virtual
+
+Entao o usuario terá acesso a area de emprestimos
+    Verifica visivel e texto    ${tituloInvestimentos}    Invista sem taxas e burocracia!
+    Verifica visivel e texto    ${investParag1}           ${textoparag1}
+    Verifica visivel e texto    ${investParag2}           Além de não pagar nada para abrir a conta, você terá taxa zero na corretagem de ações!
+
+Entao o usuario pode visualizar o botao de seguro de vida
+    Swipe By Percent    50    80    50    0
+    Verifica visivel e texto    ${buttonSeguroDeVida}     Conheça Nubank Vida: um seguro simples e que cabe no bolso.
+
+
+Entao o usuario pode visualizar o botao whatsapp
+    Swipe By Percent    50    80    50    0
+    Verifica visivel e texto    ${buttonWhatsApp}    Pagamentos seguros, rápidos e sem tarifa. A experiência Nubank sem nem sair da conversa.
+
+Entao o usuario terá acesso a area de indicaçoes
+    Verifica visivel e texto    ${textoIndicacao}    Resgate seus amigos da fila do banco
+    Verifica visivel e texto    ${textoIndicacao}    Para cada indicação aceita, um amigo salvo da burocracia
+
+Entao o usuario pode visualizar o botao planos para o futuro
+    Element Should Be Visible    ${campoConquistSonho}
+    Verifica visivel e texto     ${campoConquistSonho}    Conquiste planos futuros: conheça as opções para guardar dinheiro.
 
 Entao o usuario terá acesso area de emprestimos
     Verifica visivel e texto    ${textoEmprestimo}         O valor disponível no momento é de R$ 10.000,00
@@ -172,3 +254,8 @@ E ver seu histórico de transferência
     Compara contentDesc historico    ${transferenciaEriko}    Transferência recebida    Ontem    ERIKO BARBOSA     R$ 30,00
     Compara contentDesc historico    ${transferenciaIvan}     Transferência recebida    Ontem    IVAN COELHO       R$ 30,00
     
+E ver o historico de compras
+    Swipe By Percent  50  90  50  10
+    Compara contentDesc cartao    ${pagRecebido}        Pagamento recebido       Ontem    VOCÊ PAGOU R$ 50,00    R$ 30,00    Pix
+    Compara contentDesc cartao    ${pagSupermercado}    Supermercado             Ontem    BRENO FREITAS          R$ 30,00    Pix
+    Compara contentDesc cartao    ${transfEnviada}      Transferência enviada    Ontem    BRENO FREITAS          R$ 30,00    Pix

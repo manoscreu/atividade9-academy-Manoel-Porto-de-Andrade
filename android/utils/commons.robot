@@ -21,6 +21,15 @@ Compara contentDesc historico
     Should Contain    ${contentDesc}    ${nome}
     Should Contain    ${contentDesc}    ${valor}
 
+Compara contentDesc cartao
+    [Arguments]     ${elemento}    ${tipoMovimentaçao}    ${data}    ${nome}    ${valor}    ${tipo}
+    ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${elemento}    content-desc
+    Should Contain    ${contentDesc}    ${tipoMovimentaçao}
+    Should Contain    ${contentDesc}    ${data}
+    Should Contain    ${contentDesc}    ${nome}
+    Should Contain    ${contentDesc}    ${valor}
+    Should Contain    ${contentDesc}    ${tipo}
+
 Verifica visivel e texto
     [Arguments]    ${elemento}    ${nome}
     Element Should Be Visible    ${elemento}

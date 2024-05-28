@@ -25,10 +25,6 @@ Teste carrossel botao deposito
     Quando o usuario usar o botao desposito
     Entao o usuario terá acesso a todas as opções de deposito
 
-Teste carrossel botao emprestimo
-    Dado que o usuario se encontra na tela inicial
-    Quando o usuario usar o botao emprestimo
-    Entao o usuario terá acesso area de emprestimos
 
 Teste carrossel botao recarga de celular
     Dado que o usuario se encontra na tela inicial

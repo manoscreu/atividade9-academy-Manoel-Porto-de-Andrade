@@ -10,7 +10,7 @@ Teste botao emprestimo carrossel
     Quando o usuario usar o botao emprestimo
     Entao o usuario terá acesso area de emprestimos
 
-Validar campo disponibilidade de emprestimo card pequeno
+Validar card pequeno disponibilidade de emprestimo
     Dado que o usuario se encontra na tela inicial
     Quando o usuario acessar o botao emprestimo
     Entao o usuario terá acesso area de emprestimos

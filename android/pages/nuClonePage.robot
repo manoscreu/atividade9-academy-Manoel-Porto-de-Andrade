@@ -28,8 +28,8 @@ ${buttonCobrar}            ${prefixoImageView}  [contains(@content-desc, "Minha 
 ${pagarComPix}             ${prefixoTextos}     [contains(@content-desc, "Pagar com Pix")]
 ${pagarFaturaCard}         ${prefixoTextos}     [contains(@content-desc, "Pagar fatura do cartão")]
 ${pagarBoleto}             ${prefixoTextos}     [contains(@content-desc, "Pagar um boleto")]
-${fecharTransf}            ${prefixoEditText}   [@text="R$ 0,00"]/android.view.View/android.widget.Button[1]
-${qrTransf}                ${prefixoEditText}   [@text="R$ 0,00"]/android.view.View/android.widget.Button[2]
+${fecharTransf}            ${prefixoEditText}   [@text="R$ 100,00"]/android.view.View/android.widget.Button[1]
+${qrTransf}                ${prefixoEditText}   [@text="R$ 100,00"]/android.view.View/android.widget.Button[2]
 ${depostioPix}             ${prefixoTextos}     [contains(@content-desc, "Pix")]
 ${depostioBoleto}          ${prefixoTextos}     [contains(@content-desc, "Boleto")]
 ${depostioTED}             ${prefixoTextos}     [contains(@content-desc, "TED/DOC")]
@@ -52,9 +52,11 @@ ${cobrarConta}         //android.widget.HorizontalScrollView/android.widget.Butt
         
 #Telas
 ${telaTransferencia}        ${prefixoEditText}  [@text="R$ 0,00"]
+${telaTransferenciaEditada}        ${prefixoEditText}  [@text="R$ 100,00"]
 ${telaDeposito}             ${prefixoTextos}    [@content-desc="Como você quer depositar na sua conta do Nubank"]
 ${telaRecarga}              ${prefixoEditText}
 ${telaCobrar}               ${prefixoEditText}  [@text="R$ 0,00"]
+${telaCobrarEditada}               ${prefixoEditText}  [@text="R$ 100,00"]
 
 #Textos                    
 ${textoPix}                ${prefixoImageView}  [contains(@content-desc, "Minha área Pix")]
@@ -100,6 +102,10 @@ ${transfEnviada}           ${prefixoTextos}     [contains(@content-desc,"Transfe
 Dado que o usuario se encontra na tela inicial
     Element Should Be Visible        ${campoOla}
 
+Dado que o usuario se encontra na conta
+    Element Should Be Visible    ${campoOla}
+    Clica e espera    ${conta}    ${saldoDisponivel}
+
 
 Quando o cliente acessar area conta
     Clica e espera     ${conta}    ${saldoDisponivel}
@@ -128,27 +134,54 @@ Quando o usuario usar o botao recarga de celular
     Swipe By Percent    90    40    0    40
     Clica e espera    ${carrosselButton2}    ${telaRecarga}
 
+
 Quando o usuario usar o botao cobrar
     Swipe By Percent    90    40    0    40 
     Clica e espera    ${carrosselButton3}    ${telaCobrar}
 
+Quando o usuario rolar o carrossel ate o botao doacao
+    Swipe By Percent    90    40    0    40
+
+Quando o usuario rolar o carrossel ate o botao encontrar atalhos
+    Swipe By Percent    90    40    0    40
+
+
+Quando o usuario acessar o botao cobrar
+    Swipe By Percent    90    55    75    55
+    Clica e espera    ${cobrarConta}    ${telaCobrar}
+
+
+Quando o usuario acessar o botao emprestimos
+    clica e espera    ${emprestimoConta}    ${textoEmprestimo}
+
+Quando o usuario acessar o botao transferir
+    Clica e espera    ${transferirConta}    ${telaTransferencia}
+
+Quando o usuario acessar o botao pagar
+    Clica e espera    ${pagarConta}    ${pagarComPix}
+
+Quando o usuario acessar o botao depositar
+    Clica e espera    ${depositarConta}    ${telaDeposito}
+
 Entao o usuario tera acesso a funcao de recarga de celular
-    Element Should Be Visible    ${telaRecarga}
-    verifica campo hint    ${telaRecarga}    Qual número você quer recarregar?
+    Element Should Be Visible      ${telaRecarga}
+    verifica campo hint            ${telaRecarga}    Qual número você quer recarregar?
+    Input Text                     ${telaRecarga}    33999123456
+    Element Should Contain Text    ${telaRecarga}    (33) 99912-3456
 
 
 Entao o usuario tera acesso a funcao de cobrança
     Element Should Contain Text     ${telaCobrar}    R$ 0,00
     verifica campo hint             ${telaCobrar}    Qual valor você quer receber?
     verifica campo hint             ${telaCobrar}    Não especificar um valor >
+    Input Text                      ${telaCobrar}           10000
+    Element Should Contain Text     ${telaCobrarEditada}    R$ 100,00
 
 Entao o usuario pode visualizar o botao de doaçao
-    Swipe By Percent    90    40    0    40
     Element Should Be Visible    ${carrosselButton4}
     Verifica visivel e texto    ${doacao}    Doação
 
-Entao o usuario pode visualizar o botao encontrar atalho
-    Swipe By Percent    90    40    0    40
+Entao o usuario pode visualizar o botao encontrar atalhos
     Element Should Be Visible    ${carrosselButton5}
     Verifica visivel e texto     ${encontrarAtalhos}    Encontrar atalhos
 
@@ -180,6 +213,15 @@ Quando o usuario usar o botao de indicar amigos
     Swipe By Percent    70    90    20    90
     Clica e espera    ${ButonIndicarAmigos}    ${BTN_IndicarAmigos}
 
+Quando o usuario rolar a pagina ate o campo seguro de vida
+    Swipe By Percent    50    80    50    0
+
+Quando o usuario rolar a pagina ate o campo whatsapp
+    Swipe By Percent    50    80    50    0
+
+Quando o usuario rolar os cards ate o card planos para o futuro
+    Swipe By Percent    80    70    20    70
+
 Entao o usuario terá acesso a todas as funçoes do cartao
     Compara contentDesc contains    ${faturaAtual}         Fatura atual
     Compara contentDesc contains    ${valorFatura}         R$ 780,72
@@ -195,12 +237,10 @@ Entao o usuario terá acesso a area de emprestimos
     Verifica visivel e texto    ${investParag2}           Além de não pagar nada para abrir a conta, você terá taxa zero na corretagem de ações!
 
 Entao o usuario pode visualizar o botao de seguro de vida
-    Swipe By Percent    50    80    50    0
     Verifica visivel e texto    ${buttonSeguroDeVida}     Conheça Nubank Vida: um seguro simples e que cabe no bolso.
 
 
 Entao o usuario pode visualizar o botao whatsapp
-    Swipe By Percent    50    80    50    0
     Verifica visivel e texto    ${buttonWhatsApp}    Pagamentos seguros, rápidos e sem tarifa. A experiência Nubank sem nem sair da conversa.
 
 Entao o usuario terá acesso a area de indicaçoes
@@ -229,8 +269,11 @@ Entao o usuario terá acesso a todas as opções de deposito
     Compara contentDesc contains          ${depostioSalario}   Receba todo mês direto aqui na sua conta, sem custo.
 
 Entao o usuario terá acesso a area de transferencia
-    Element Should Be Visible    ${fecharTransf}
-    Element Should Be Visible    ${qrTransf}
+    Element Should Contain Text     ${telaTransferencia}    R$ 0,00
+    Input Text                      ${telaTransferencia}    10000
+    Element Should Contain Text     ${telaTransferenciaEditada}     R$ 100,00
+    Element Should Be Visible       ${fecharTransf}
+    Element Should Be Visible       ${qrTransf}
 
 Entao o usuario terá acesso a todas as opções de pagamento
     Verifica visivel e texto    ${pagarComPix}        Pagar com Pix 
@@ -240,10 +283,11 @@ Entao o usuario terá acesso a todas as opções de pagamento
     Verifica visivel e texto    ${pagarBoleto}        Pagar um boleto 
     Verifica visivel e texto    ${pagarBoleto}        Contas de luz, água, etc.
 
-Entao o usuario podera ver seu saldo e dinheiro guardado atuais
+Entao o usuario podera ver todas informaçoes de saldo de sua conta
     Verifica visivel e texto         ${saldoValor}    R$ 181,79
     Compara contentDesc contains    ${dinheiroGuardado}    Dinheiro guardado
     Compara contentDesc contains    ${dinheiroGuardado}    R$ 240,02
+    ##TODO REDIMENTO TOTAL
 
     
 Entao o usuario terá acesso a todas as funçoes de pix

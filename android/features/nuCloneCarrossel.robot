@@ -25,6 +25,10 @@ Teste carrossel botao deposito
     Quando o usuario usar o botao desposito
     Entao o usuario terá acesso a todas as opções de deposito
 
+Teste carrossel botao emprestimo 
+    Dado que o usuario se encontra na tela inicial
+    Quando o usuario usar o botao emprestimo
+    Entao o usuario terá acesso area de emprestimos
 
 Teste carrossel botao recarga de celular
     Dado que o usuario se encontra na tela inicial
@@ -38,8 +42,10 @@ Teste carrossel botao cobrar
 
 Teste Carrossel botao doação
     Dado que o usuario se encontra na tela inicial
+    Quando o usuario rolar o carrossel ate o botao doacao
     Entao o usuario pode visualizar o botao de doaçao
 
 Teste Carrossel botao encontrar atalhos
     Dado que o usuario se encontra na tela inicial
-    Entao o usuario pode visualizar o botao encontrar atalho
+    Quando o usuario rolar o carrossel ate o botao encontrar atalhos
+    Entao o usuario pode visualizar o botao encontrar atalhos

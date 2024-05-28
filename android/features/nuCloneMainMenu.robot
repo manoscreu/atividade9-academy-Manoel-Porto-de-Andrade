@@ -8,8 +8,9 @@ Resource    ..//base.robot
 Validar campo Conta
     Dado que o usuario se encontra na tela inicial
     Quando o cliente acessar area conta
-    Entao o usuario podera ver seu saldo atual
-    E ver seu histórico de transferência
+    Entao o usuario podera ver seu saldo e dinheiro guardado atuais
+    E ver todas as opçoes de tranferencia
+    E ver seu histórico de transferência 
 
 Validar botao meus cartoes
     Dado que o usuario se encontra na tela inicial

@@ -1,6 +1,6 @@
 *** Settings ***
 
-Resource    ..//base.robot
+Resource    ../base.robot
 
 *** Keywords ***
 Clica e espera
@@ -13,6 +13,8 @@ Compara contentDesc contains
     [Arguments]     ${elemento}    ${comparar}
     ${contentDesc}=     AppiumLibrary.Get Element Attribute    ${elemento}    content-desc
     Should Contain    ${contentDesc}    ${comparar}
+
+
 Compara contentDesc historico
     [Arguments]     ${elemento}    ${tipoMovimentaçao}    ${data}    ${nome}    ${valor}
     ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${elemento}    content-desc

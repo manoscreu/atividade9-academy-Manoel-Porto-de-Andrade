@@ -5,6 +5,7 @@ Library    XML
 *** Variables ***
 
 #Prefixos
+${prefixoEditText}         xpath=//android.widget.EditText
 ${prefixoButton}           xpath=//android.widget.Button
 ${prefixoTextos}           xpath=//android.view.View
 ${prefixoCarrossel}        xpath=//android.widget.ScrollView/android.widget.HorizontalScrollView[1]
@@ -17,7 +18,7 @@ ${carrosselButton3}        ${prefixoCarrossel}  /android.widget.Button[3]
 ${carrosselButton4}        ${prefixoCarrossel}  /android.widget.Button[4]
 ${carrosselButton5}        ${prefixoCarrossel}  /android.widget.Button[5]
 ${meusCartoes}             ${prefixoTextos}     [@content-desc="Meus cartões"]
-${campoEmprestimo}         ${prefixoTextos}     [@content-desc="Você tem R$ 10.000,00 disponíveis para empréstimo."]
+${campoEmprestimo}         ${prefixoTextos}     //android.view.View[@content-desc="Você tem R$ 10.000,00 disponíveis para empréstimo."]
 ${buttonMeusCartoes}       ${prefixoTextos}     [@content-desc="Meus cartões"]
 ${cartoes}                 ${prefixoTextos}     [@content-desc="Cartão de Crédito"]
 ${conta}                   ${prefixoTextos}     [contains(@content-desc, "Conta")]
@@ -27,8 +28,8 @@ ${buttonCobrar}            ${prefixoImageView}  [contains(@content-desc, "Minha 
 ${pagarComPix}             ${prefixoTextos}     [contains(@content-desc, "Pagar com Pix")]
 ${pagarFaturaCard}         ${prefixoTextos}     [contains(@content-desc, "Pagar fatura do cartão")]
 ${pagarBoleto}             ${prefixoTextos}     [contains(@content-desc, "Pagar um boleto")]
-${fecharTransf}            xpath=//android.widget.EditText[@text="R$ 0,00"]/android.view.View/android.widget.Button[1]
-${qrTransf}                xpath=//android.widget.EditText[@text="R$ 0,00"]/android.view.View/android.widget.Button[2]
+${fecharTransf}            ${prefixoEditText}   [@text="R$ 0,00"]/android.view.View/android.widget.Button[1]
+${qrTransf}                ${prefixoEditText}   [@text="R$ 0,00"]/android.view.View/android.widget.Button[2]
 ${depostioPix}             ${prefixoTextos}     [contains(@content-desc, "Pix")]
 ${depostioBoleto}          ${prefixoTextos}     [contains(@content-desc, "Boleto")]
 ${depostioTED}             ${prefixoTextos}     [contains(@content-desc, "TED/DOC")]
@@ -43,12 +44,17 @@ ${BTN_IndicarAmigos}       ${prefixoButton}     [@content-desc="INDICAR AMIGOS"]
 ${buttonCartao}            ${prefixoTextos}     [contains(@content-desc,"Cartão de Crédito")]
 ${widgetConvidar}          //android.widget.ScrollView/android.widget.Button[3]
 ${eyeWidget}               //android.widget.ScrollView/android.widget.Button[1]
+${depositarConta}          //android.widget.HorizontalScrollView/android.widget.Button[1]
+${pagarConta}              //android.widget.HorizontalScrollView/android.widget.Button[2]
+${transferirConta}         //android.widget.HorizontalScrollView/android.widget.Button[3]
+${emprestimoConta}         //android.widget.HorizontalScrollView/android.widget.Button[4]
+${cobrarConta}         //android.widget.HorizontalScrollView/android.widget.Button[5]
         
 #Telas
-${telaTransferencia}        xpath=//android.widget.EditText[@text="R$ 0,00"]
-${telaDeposito}             [@content-desc="NOVO EMPRÉSTIMO"]
-${telaRecarga}              //android.widget.EditText
-${telaCobrar}               //android.widget.EditText[@text="R$ 0,00"]
+${telaTransferencia}        ${prefixoEditText}  [@text="R$ 0,00"]
+${telaDeposito}             ${prefixoTextos}    [@content-desc="Como você quer depositar na sua conta do Nubank"]
+${telaRecarga}              ${prefixoEditText}
+${telaCobrar}               ${prefixoEditText}  [@text="R$ 0,00"]
 
 #Textos                    
 ${textoPix}                ${prefixoImageView}  [contains(@content-desc, "Minha área Pix")]
@@ -57,6 +63,7 @@ ${campoOla}                ${prefixoTextos}     [@content-desc="Olá, Breno Frei
 ${campoConquistSonho}      ${prefixoTextos}     [@content-desc="Conquiste planos futuros: conheça as opções para guardar dinheiro."]
 ${saldoDisponivel}         ${prefixoTextos}     [@content-desc="Saldo disponível"]
 ${saldoValor}              ${prefixoTextos}     [@content-desc="R$ 181,79"]
+${dinheiroGuardado}        ${prefixoTextos}     [contains(@content-desc,"Dinheiro guardado")]
 ${transferenciaPaty}       ${prefixoTextos}     [contains(@content-desc, "PATRICIA COSTA")]
 ${transferenciaJey}        ${prefixoTextos}     [contains(@content-desc, "ANDRE JEY")]
 ${transferenciaEriko}      ${prefixoTextos}     [contains(@content-desc, "ERIKO BARBOSA")]
@@ -73,8 +80,8 @@ ${encontrarAtalhos}        ${prefixoTextos}     [@content-desc="Encontrar atalho
 ${tituloInvestimentos}     ${prefixoTextos}     [@content-desc="Invista sem taxas e burocracia!"]
 ${investParag1}            ${prefixoTextos}     [contains(@content-desc, "Estamos convidando alguns clientes")]
 ${investParag2}            ${prefixoTextos}     [contains(@content-desc,"Além de não pagar nada para abrir a conta")]
-${textoparag1}    Estamos convidando alguns clientes do Nubank para serem os primeiros a fazer parte desta revolução roxa nos investimentos, e você é um deles!
-${textoIndicacao}          //android.widget.ImageView[contains(@content-desc, "Resgate seus amigos da fila do banco")]
+${textoparag1}             Estamos convidando alguns clientes do Nubank para serem os primeiros a fazer parte desta revolução roxa nos investimentos, e você é um deles!
+${textoIndicacao}          ${prefixoImageView}  [contains(@content-desc, "Resgate seus amigos da fila do banco")]
 ${faturaAtual}             ${prefixoTextos}     [@content-desc="Fatura atual"]
 ${valorFatura}             ${prefixoTextos}     [@content-desc="R$ 780,72"]
 ${limiteDisponivel}        ${prefixoTextos}     [@content-desc="Limite disponível R$ 806,78"]
@@ -122,19 +129,18 @@ Quando o usuario usar o botao recarga de celular
     Clica e espera    ${carrosselButton2}    ${telaRecarga}
 
 Quando o usuario usar o botao cobrar
-    Swipe By Percent    90    40    0    40
+    Swipe By Percent    90    40    0    40 
     Clica e espera    ${carrosselButton3}    ${telaCobrar}
 
-Entao o usuario tera acesso a funcao de cobrança
-    Element Should Be Visible    ${telaRecarga}
-    ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${telaRecarga}    hint
-    Should Contain    ${contentDesc}    Qual número você quer recarregar?
-
-
 Entao o usuario tera acesso a funcao de recarga de celular
-    Verifica visivel e texto    ${telaCobrar}    R$ 0,00
-    verifica campo hint         ${telaCobrar}    Qual valor você quer receber?
-    verifica campo hint         ${telaCobrar}    Não especificar um valor >
+    Element Should Be Visible    ${telaRecarga}
+    verifica campo hint    ${telaRecarga}    Qual número você quer recarregar?
+
+
+Entao o usuario tera acesso a funcao de cobrança
+    Element Should Contain Text     ${telaCobrar}    R$ 0,00
+    verifica campo hint             ${telaCobrar}    Qual valor você quer receber?
+    verifica campo hint             ${telaCobrar}    Não especificar um valor >
 
 Entao o usuario pode visualizar o botao de doaçao
     Swipe By Percent    90    40    0    40
@@ -154,8 +160,7 @@ Quando o usuario acessar o atalho de convidar amigos
     Clica e espera    ${widgetConvidar}    ${textoIndicacao}
 
 Quando o usuario acessar o botao emprestimo
-    Element Should Be Visible    ${campoEmprestimo}
-    Verifica visivel e texto     ${buttonMeusCartoes}    Você tem R$ 10.000,00 disponíveis para empréstimo.
+    Clica e espera     ${campoEmprestimo}    ${textoAnalise}
 
 Quando o usuario acessar o botao cartao de credito
     Swipe By Percent    50    80    50    30
@@ -163,7 +168,7 @@ Quando o usuario acessar o botao cartao de credito
 
 Quando acessar o campo emprestimo
     Swipe By Percent    50    80    50    30
-    Clica e espera    ${buttonEmprestimo}    ${faturaAtual}
+    Clica e espera    ${buttonEmprestimo}    ${textoEmprestimo}
 
 Quando acessar o campo investimentos
     Swipe By Percent    50    80    50    30
@@ -235,8 +240,10 @@ Entao o usuario terá acesso a todas as opções de pagamento
     Verifica visivel e texto    ${pagarBoleto}        Pagar um boleto 
     Verifica visivel e texto    ${pagarBoleto}        Contas de luz, água, etc.
 
-Entao o usuario podera ver seu saldo atual
+Entao o usuario podera ver seu saldo e dinheiro guardado atuais
     Verifica visivel e texto         ${saldoValor}    R$ 181,79
+    Compara contentDesc contains    ${dinheiroGuardado}    Dinheiro guardado
+    Compara contentDesc contains    ${dinheiroGuardado}    R$ 240,02
 
     
 Entao o usuario terá acesso a todas as funçoes de pix
@@ -246,6 +253,15 @@ Entao o usuario terá acesso a todas as funçoes de pix
     Element Should Be Visible   ${buttonPagar}
     Element Should Be Visible   ${buttonTrasferir}
     Element Should Be Visible   ${buttonCobrar}
+
+E ver todas as opçoes de tranferencia
+    Element Should Be Visible    ${depositarConta}
+    Element Should Be Visible    ${pagarConta}
+    Element Should Be Visible    ${transferirConta}
+    Element Should Be Visible    ${emprestimoConta}
+    Swipe By Percent    80    60    70    50
+    Element Should Be Visible    ${cobrarConta}
+
 
 E ver seu histórico de transferência
     Swipe By Percent  50  90  50  10

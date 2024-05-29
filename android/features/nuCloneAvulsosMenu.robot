@@ -5,13 +5,17 @@ Resource    ..//base.robot
 
 
 *** Test Cases ***
+Validar botao esconder valores
+    Dado que o usuario se encontra na tela inicial
+    E os valores da conta e fatura estao disponíveis para visualizar
+    Quando o usuario usar o botao de esconder valores
+    Entao o sistema deve esconder os valores 
 
 Validar card planos para o futuro
     Dado que o usuario se encontra na tela inicial
     Quando o usuario rolar os cards ate o card planos para o futuro 
     Entao o usuario pode visualizar o botao planos para o futuro
 
-#TODO MUDAR DE LUGAR
 Validar botao investimentos
     Dado que o usuario se encontra na tela inicial
     Quando acessar o campo investimentos

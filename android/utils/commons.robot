@@ -8,13 +8,6 @@ Clica e espera
     Click Element    ${elemento1}
     Wait Until Element Is Visible    ${elementoAEsperar}
 
-
-Compara contentDesc contains
-    [Arguments]     ${elemento}    ${comparar}
-    ${contentDesc}=     AppiumLibrary.Get Element Attribute    ${elemento}    content-desc
-    Should Contain    ${contentDesc}    ${comparar}
-
-
 Compara contentDesc historico
     [Arguments]     ${elemento}    ${tipoMovimentaçao}    ${data}    ${nome}    ${valor}
     ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${elemento}    content-desc
@@ -32,7 +25,7 @@ Compara contentDesc cartao
     Should Contain    ${contentDesc}    ${valor}
     Should Contain    ${contentDesc}    ${tipo}
 
-Verifica visivel e texto
+Verifica visivel e contentDesc
     [Arguments]    ${elemento}    ${nome}
     Element Should Be Visible    ${elemento}
     ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${elemento}    content-desc
@@ -42,3 +35,10 @@ verifica campo hint
     [Arguments]    ${elemento}    ${nome}
     ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${elemento}    hint
     Should Contain    ${contentDesc}    ${nome}
+
+
+Verifica visivel e texto nao deve conter
+    [Arguments]    ${elemento}    ${nome}
+    Element Should Be Visible    ${elemento}
+    ${contentDesc}=    AppiumLibrary.Get Element Attribute    ${elemento}    content-desc
+    Should Not Contain    ${contentDesc}    ${nome}

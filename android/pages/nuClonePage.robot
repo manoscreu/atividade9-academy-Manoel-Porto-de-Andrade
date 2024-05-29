@@ -48,15 +48,15 @@ ${depositarConta}          //android.widget.HorizontalScrollView/android.widget.
 ${pagarConta}              //android.widget.HorizontalScrollView/android.widget.Button[2]
 ${transferirConta}         //android.widget.HorizontalScrollView/android.widget.Button[3]
 ${emprestimoConta}         //android.widget.HorizontalScrollView/android.widget.Button[4]
-${cobrarConta}         //android.widget.HorizontalScrollView/android.widget.Button[5]
+${cobrarConta}             //android.widget.HorizontalScrollView/android.widget.Button[5]
         
 #Telas
-${telaTransferencia}        ${prefixoEditText}  [@text="R$ 0,00"]
-${telaTransferenciaEditada}        ${prefixoEditText}  [@text="R$ 100,00"]
-${telaDeposito}             ${prefixoTextos}    [@content-desc="Como você quer depositar na sua conta do Nubank"]
-${telaRecarga}              ${prefixoEditText}
-${telaCobrar}               ${prefixoEditText}  [@text="R$ 0,00"]
-${telaCobrarEditada}               ${prefixoEditText}  [@text="R$ 100,00"]
+${telaTransferencia}       ${prefixoEditText}   [@text="R$ 0,00"]
+${telaTransfEditada}       ${prefixoEditText}   [@text="R$ 100,00"]
+${telaDeposito}            ${prefixoTextos}     [@content-desc="Como você quer depositar na sua conta do Nubank"]
+${telaRecarga}             ${prefixoEditText}
+${telaCobrar}              ${prefixoEditText}   [@text="R$ 0,00"]
+${telaCobrarEditada}       ${prefixoEditText}   [@text="R$ 100,00"]
 
 #Textos                    
 ${textoPix}                ${prefixoImageView}  [contains(@content-desc, "Minha área Pix")]
@@ -82,7 +82,6 @@ ${encontrarAtalhos}        ${prefixoTextos}     [@content-desc="Encontrar atalho
 ${tituloInvestimentos}     ${prefixoTextos}     [@content-desc="Invista sem taxas e burocracia!"]
 ${investParag1}            ${prefixoTextos}     [contains(@content-desc, "Estamos convidando alguns clientes")]
 ${investParag2}            ${prefixoTextos}     [contains(@content-desc,"Além de não pagar nada para abrir a conta")]
-${textoparag1}             Estamos convidando alguns clientes do Nubank para serem os primeiros a fazer parte desta revolução roxa nos investimentos, e você é um deles!
 ${textoIndicacao}          ${prefixoImageView}  [contains(@content-desc, "Resgate seus amigos da fila do banco")]
 ${faturaAtual}             ${prefixoTextos}     [@content-desc="Fatura atual"]
 ${valorFatura}             ${prefixoTextos}     [@content-desc="R$ 780,72"]
@@ -94,6 +93,9 @@ ${cartaoVirtual}           ${prefixoTextos}     [@content-desc="Cartão virtual"
 ${pagRecebido}             ${prefixoTextos}     [contains(@content-desc,"Pagamento recebido")]
 ${pagSupermercado}         ${prefixoTextos}     [contains(@content-desc,"Supermercado")]
 ${transfEnviada}           ${prefixoTextos}     [contains(@content-desc,"Transferência enviada")]
+${campoRedimentos}         ${prefixoTextos}     [contains(@content-desc,"Rendimento total da conta")]
+${textoparag1}             Estamos convidando alguns clientes do Nubank para serem os primeiros a fazer parte desta revolução roxa nos investimentos, e você é um deles!
+
 
 
 
@@ -179,15 +181,15 @@ Entao o usuario tera acesso a funcao de cobrança
 
 Entao o usuario pode visualizar o botao de doaçao
     Element Should Be Visible    ${carrosselButton4}
-    Verifica visivel e texto    ${doacao}    Doação
+    Verifica visivel e contentDesc    ${doacao}    Doação
 
 Entao o usuario pode visualizar o botao encontrar atalhos
     Element Should Be Visible    ${carrosselButton5}
-    Verifica visivel e texto     ${encontrarAtalhos}    Encontrar atalhos
+    Verifica visivel e contentDesc     ${encontrarAtalhos}    Encontrar atalhos
 
 Entao o usuario pode visualizar o botao meus cartoes
     Element Should Be Visible    ${buttonMeusCartoes}
-    Verifica visivel e texto     ${buttonMeusCartoes}    Meus cartões
+    Verifica visivel e contentDesc     ${buttonMeusCartoes}    Meus cartões
 
 Quando o usuario acessar o atalho de convidar amigos
     Clica e espera    ${widgetConvidar}    ${textoIndicacao}
@@ -222,81 +224,91 @@ Quando o usuario rolar a pagina ate o campo whatsapp
 Quando o usuario rolar os cards ate o card planos para o futuro
     Swipe By Percent    80    70    20    70
 
+Quando o usuario usar o botao de esconder valores
+    Swipe By Percent    50    30    50    50
+    Click Element    ${eyeWidget}
+
 Entao o usuario terá acesso a todas as funçoes do cartao
-    Compara contentDesc contains    ${faturaAtual}         Fatura atual
-    Compara contentDesc contains    ${valorFatura}         R$ 780,72
-    Compara contentDesc contains    ${limiteDisponivel}    Limite disponível R$ 806,78
-    Compara contentDesc contains    ${pagarFatura}         Pagar fatura
-    Compara contentDesc contains    ${resumoFatura}        Resumo de faturas
-    Compara contentDesc contains    ${ajustarLimites}      Ajustar limites
-    Compara contentDesc contains    ${cartaoVirtual}       Cartão virtual
+    Verifica visivel e contentDesc    ${faturaAtual}         Fatura atual
+    Verifica visivel e contentDesc    ${valorFatura}         R$ 780,72
+    Verifica visivel e contentDesc    ${limiteDisponivel}    Limite disponível R$ 806,78
+    Verifica visivel e contentDesc    ${pagarFatura}         Pagar fatura
+    Verifica visivel e contentDesc    ${resumoFatura}        Resumo de faturas
+    Verifica visivel e contentDesc    ${ajustarLimites}      Ajustar limites
+    Verifica visivel e contentDesc    ${cartaoVirtual}       Cartão virtual
 
 Entao o usuario terá acesso a area de emprestimos
-    Verifica visivel e texto    ${tituloInvestimentos}    Invista sem taxas e burocracia!
-    Verifica visivel e texto    ${investParag1}           ${textoparag1}
-    Verifica visivel e texto    ${investParag2}           Além de não pagar nada para abrir a conta, você terá taxa zero na corretagem de ações!
+    Verifica visivel e contentDesc    ${tituloInvestimentos}    Invista sem taxas e burocracia!
+    Verifica visivel e contentDesc    ${investParag1}           ${textoparag1}
+    Verifica visivel e contentDesc    ${investParag2}           Além de não pagar nada para abrir a conta, você terá taxa zero na corretagem de ações!
 
 Entao o usuario pode visualizar o botao de seguro de vida
-    Verifica visivel e texto    ${buttonSeguroDeVida}     Conheça Nubank Vida: um seguro simples e que cabe no bolso.
+    Verifica visivel e contentDesc    ${buttonSeguroDeVida}     Conheça Nubank Vida: um seguro simples e que cabe no bolso.
 
 
 Entao o usuario pode visualizar o botao whatsapp
-    Verifica visivel e texto    ${buttonWhatsApp}    Pagamentos seguros, rápidos e sem tarifa. A experiência Nubank sem nem sair da conversa.
+    Verifica visivel e contentDesc    ${buttonWhatsApp}    Pagamentos seguros, rápidos e sem tarifa. A experiência Nubank sem nem sair da conversa.
 
 Entao o usuario terá acesso a area de indicaçoes
-    Verifica visivel e texto    ${textoIndicacao}    Resgate seus amigos da fila do banco
-    Verifica visivel e texto    ${textoIndicacao}    Para cada indicação aceita, um amigo salvo da burocracia
+    Verifica visivel e contentDesc    ${textoIndicacao}    Resgate seus amigos da fila do banco
+    Verifica visivel e contentDesc    ${textoIndicacao}    Para cada indicação aceita, um amigo salvo da burocracia
 
 Entao o usuario pode visualizar o botao planos para o futuro
     Element Should Be Visible    ${campoConquistSonho}
-    Verifica visivel e texto     ${campoConquistSonho}    Conquiste planos futuros: conheça as opções para guardar dinheiro.
+    Verifica visivel e contentDesc     ${campoConquistSonho}    Conquiste planos futuros: conheça as opções para guardar dinheiro.
 
 Entao o usuario terá acesso area de emprestimos
-    Verifica visivel e texto    ${textoEmprestimo}         O valor disponível no momento é de R$ 10.000,00
-    Verifica visivel e texto    ${textoAnalise}            Este valor pode mudar diariamente devido à nossa análise de crédito.
-    Verifica visivel e texto    ${entendaFunciona}         Entenda como funciona >
-    Verifica visivel e texto    ${buttonNovoEmprestimo}    NOVO EMPRÉSTIMO
-    Verifica visivel e texto    ${emprestimosAtivos}       Você não possui nenhum empréstimo ativo.
+    Verifica visivel e contentDesc    ${textoEmprestimo}         O valor disponível no momento é de R$ 10.000,00
+    Verifica visivel e contentDesc    ${textoAnalise}            Este valor pode mudar diariamente devido à nossa análise de crédito.
+    Verifica visivel e contentDesc    ${entendaFunciona}         Entenda como funciona >
+    Verifica visivel e contentDesc    ${buttonNovoEmprestimo}    NOVO EMPRÉSTIMO
+    Verifica visivel e contentDesc    ${emprestimosAtivos}       Você não possui nenhum empréstimo ativo.
 
 Entao o usuario terá acesso a todas as opções de deposito
     Element Should Be Visible             ${depostioPix}
-    Compara contentDesc contains          ${depostioPix}       Sem custo e cai na hora, mesmo de madrugada e fim de semana.
+    Verifica visivel e contentDesc          ${depostioPix}       Sem custo e cai na hora, mesmo de madrugada e fim de semana.
     Element Should Be Visible             ${depostioBoleto}
-    Compara contentDesc contains          ${depostioBoleto}    Sem custo e pode levar 3 dias úteis para o dinheiro cair.
+    Verifica visivel e contentDesc          ${depostioBoleto}    Sem custo e pode levar 3 dias úteis para o dinheiro cair.
     Element Should Be Visible             ${depostioTED}
-    Compara contentDesc contains          ${depostioTED}       Pode ter custo e cai somente em horário comercial de dias úteis.
+    Verifica visivel e contentDesc          ${depostioTED}       Pode ter custo e cai somente em horário comercial de dias úteis.
     Element Should Be Visible             ${depostioSalario}
-    Compara contentDesc contains          ${depostioSalario}   Receba todo mês direto aqui na sua conta, sem custo.
+    Verifica visivel e contentDesc          ${depostioSalario}   Receba todo mês direto aqui na sua conta, sem custo.
 
 Entao o usuario terá acesso a area de transferencia
     Element Should Contain Text     ${telaTransferencia}    R$ 0,00
     Input Text                      ${telaTransferencia}    10000
-    Element Should Contain Text     ${telaTransferenciaEditada}     R$ 100,00
+    Element Should Contain Text     ${telaTransfEditada}     R$ 100,00
     Element Should Be Visible       ${fecharTransf}
     Element Should Be Visible       ${qrTransf}
 
 Entao o usuario terá acesso a todas as opções de pagamento
-    Verifica visivel e texto    ${pagarComPix}        Pagar com Pix 
-    Verifica visivel e texto    ${pagarComPix}        Leia um QR Code ou cole o código.
-    Verifica visivel e texto    ${pagarFaturaCard}    Pagar fatura do cartão 
-    Verifica visivel e texto    ${pagarFaturaCard}    Libera o limite do seu Cartão de Crédito.
-    Verifica visivel e texto    ${pagarBoleto}        Pagar um boleto 
-    Verifica visivel e texto    ${pagarBoleto}        Contas de luz, água, etc.
+    Verifica visivel e contentDesc    ${pagarComPix}        Pagar com Pix 
+    Verifica visivel e contentDesc    ${pagarComPix}        Leia um QR Code ou cole o código.
+    Verifica visivel e contentDesc    ${pagarFaturaCard}    Pagar fatura do cartão 
+    Verifica visivel e contentDesc    ${pagarFaturaCard}    Libera o limite do seu Cartão de Crédito.
+    Verifica visivel e contentDesc    ${pagarBoleto}        Pagar um boleto 
+    Verifica visivel e contentDesc    ${pagarBoleto}        Contas de luz, água, etc.
 
 Entao o usuario podera ver todas informaçoes de saldo de sua conta
-    Verifica visivel e texto         ${saldoValor}    R$ 181,79
-    Compara contentDesc contains    ${dinheiroGuardado}    Dinheiro guardado
-    Compara contentDesc contains    ${dinheiroGuardado}    R$ 240,02
-    ##TODO REDIMENTO TOTAL
+    Verifica visivel e contentDesc         ${saldoValor}    R$ 181,79
+    Verifica visivel e contentDesc    ${dinheiroGuardado}    Dinheiro guardado
+    Verifica visivel e contentDesc    ${dinheiroGuardado}    R$ 240,02
+    Verifica visivel e contentDesc    ${campoRedimentos}    Rendimento total da conta
+    Verifica visivel e contentDesc    ${campoRedimentos}    +R$ 0,20 este mês
 
     
 Entao o usuario terá acesso a todas as funçoes de pix
-    Verifica visivel e texto    ${minhasChaves}    Minhas chaves
-    Verifica visivel e texto    ${meuLimite}       Meu limite Pix
-    Verifica visivel e texto    ${meAjuda}         Me ajuda
+    Verifica visivel e contentDesc    ${minhasChaves}    Minhas chaves
+    Verifica visivel e contentDesc    ${meuLimite}       Meu limite Pix
+    Verifica visivel e contentDesc    ${meAjuda}         Me ajuda
     Element Should Be Visible   ${buttonPagar}
     Element Should Be Visible   ${buttonTrasferir}
     Element Should Be Visible   ${buttonCobrar}
+
+Entao o sistema deve esconder os valores
+    Verifica visivel e texto nao deve conter    ${conta}    R$ 181,79
+    Swipe By Percent    50    50    50    30
+    Verifica visivel e texto nao deve conter    ${buttonCartao}    R$ 780,72
 
 E ver todas as opçoes de tranferencia
     Element Should Be Visible    ${depositarConta}
@@ -319,3 +331,8 @@ E ver o historico de compras
     Compara contentDesc cartao    ${pagRecebido}        Pagamento recebido       Ontem    VOCÊ PAGOU R$ 50,00    R$ 30,00    Pix
     Compara contentDesc cartao    ${pagSupermercado}    Supermercado             Ontem    BRENO FREITAS          R$ 30,00    Pix
     Compara contentDesc cartao    ${transfEnviada}      Transferência enviada    Ontem    BRENO FREITAS          R$ 30,00    Pix
+
+E os valores da conta e fatura estao disponíveis para visualizar
+    Verifica visivel e contentDesc    ${conta}    R$ 181,79
+    Swipe By Percent    50    50    50    30
+    Verifica visivel e contentDesc    ${buttonCartao}   R$ 780,72 

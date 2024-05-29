@@ -90,6 +90,8 @@ ${pagarFatura}             ${prefixoTextos}     [@content-desc="Pagar fatura"]
 ${resumoFatura}            ${prefixoTextos}     [@content-desc="Resumo de faturas"]
 ${ajustarLimites}          ${prefixoTextos}     [@content-desc="Ajustar limites"]
 ${cartaoVirtual}           ${prefixoTextos}     [@content-desc="Cartão virtual"]
+${bloquearCartao}          ${prefixoTextos}     [@content-desc="Bloquear cartão"]
+${indicarAmigosCard}       ${prefixoTextos}     [@content-desc="Indicar amigos"]
 ${pagRecebido}             ${prefixoTextos}     [contains(@content-desc,"Pagamento recebido")]
 ${pagSupermercado}         ${prefixoTextos}     [contains(@content-desc,"Supermercado")]
 ${transfEnviada}           ${prefixoTextos}     [contains(@content-desc,"Transferência enviada")]
@@ -236,6 +238,9 @@ Entao o usuario terá acesso a todas as funçoes do cartao
     Verifica visivel e contentDesc    ${resumoFatura}        Resumo de faturas
     Verifica visivel e contentDesc    ${ajustarLimites}      Ajustar limites
     Verifica visivel e contentDesc    ${cartaoVirtual}       Cartão virtual
+    Swipe By Percent    80    90    10    90
+    Verifica visivel e contentDesc    ${bloquearCartao}      Bloquear cartão
+    Verifica visivel e contentDesc    ${indicarAmigosCard}   Indicar amigos
 
 Entao o usuario terá acesso a area de emprestimos
     Verifica visivel e contentDesc    ${tituloInvestimentos}    Invista sem taxas e burocracia!
